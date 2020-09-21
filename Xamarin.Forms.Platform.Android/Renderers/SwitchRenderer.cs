@@ -11,6 +11,7 @@ namespace Xamarin.Forms.Platform.Android
 {
 	public class SwitchRenderer : ViewRenderer<Switch, ASwitch>, CompoundButton.IOnCheckedChangeListener
 	{
+		[PortHandler]
 		Drawable _defaultTrackDrawable;
 		bool _changedThumbColor;
 
@@ -26,12 +27,14 @@ namespace Xamarin.Forms.Platform.Android
 			AutoPackage = false;
 		}
 
+		[PortHandler]
 		void CompoundButton.IOnCheckedChangeListener.OnCheckedChanged(CompoundButton buttonView, bool isChecked)
 		{
 			((IViewController)Element).SetValueFromRenderer(Switch.IsToggledProperty, isChecked);
 			UpdateOnColor();
 		}
 
+		[PortHandler]
 		public override SizeRequest GetDesiredSize(int widthConstraint, int heightConstraint)
 		{
 			SizeRequest sizeConstraint = base.GetDesiredSize(widthConstraint, heightConstraint);
@@ -64,6 +67,7 @@ namespace Xamarin.Forms.Platform.Android
 			base.Dispose(disposing);
 		}
 
+		[PortHandler]
 		protected override ASwitch CreateNativeControl()
 		{
 			return new ASwitch(Context);
@@ -107,6 +111,7 @@ namespace Xamarin.Forms.Platform.Android
 				UpdateThumbColor();
 		}
 
+		[PortHandler]
 		void UpdateOnColor()
 		{
 			if (Element != null)
@@ -132,6 +137,7 @@ namespace Xamarin.Forms.Platform.Android
 			}
 		}
 
+		[PortHandler]
 		void UpdateThumbColor()
 		{
 			if (Element == null)
