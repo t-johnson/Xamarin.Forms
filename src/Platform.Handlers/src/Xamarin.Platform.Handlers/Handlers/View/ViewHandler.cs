@@ -1,5 +1,4 @@
-﻿using System;
-#if __IOS__
+﻿#if __IOS__
 using NativeView = UIKit.UIView;
 #elif __MACOS__
 using NativeView = AppKit.NSView;
