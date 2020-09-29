@@ -13,20 +13,12 @@ using AndroidX.AppCompat.Graphics.Drawable;
 using AndroidX.AppCompat.Widget;
 using AndroidX.DrawerLayout.Widget;
 using Google.Android.Material.AppBar;
-using Xamarin.Forms.Internals;
-using AColor = Android.Graphics.Color;
+using Xamarin.Platform;
 using ActionBarDrawerToggle = AndroidX.AppCompat.App.ActionBarDrawerToggle;
 using ADrawableCompat = AndroidX.Core.Graphics.Drawable.DrawableCompat;
-using ATextView = global::Android.Widget.TextView;
 using AView = Android.Views.View;
 using LP = Android.Views.ViewGroup.LayoutParams;
 using R = Android.Resource;
-using ATextView = global::Android.Widget.TextView;
-using AColor = Android.Graphics.Color;
-using Xamarin.Forms.Internals;
-using System.Collections.Generic;
-using System.Linq;
-using Xamarin.Platform;
 
 namespace Xamarin.Forms.Platform.Android
 {
