@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)CollectionViewGroupTypeIssue.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Issue12153.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Issue10324.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Github9536.xaml.cs">
       <DependentUpon>Github9536.xaml</DependentUpon>
@@ -1484,6 +1485,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Issue11573.xaml.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Issue11496.xaml.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Issue11703.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Issue11963.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Bugzilla22229.xaml">
@@ -1755,7 +1757,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Issue11653.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>      
+    </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Issue11737.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
