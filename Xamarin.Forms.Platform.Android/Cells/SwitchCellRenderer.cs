@@ -2,6 +2,7 @@ using System.ComponentModel;
 using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
+using Xamarin.Platform;
 using Android.OS;
 using Android.Views;
 using ASwitch = Android.Widget.Switch;

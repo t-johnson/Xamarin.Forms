@@ -21,7 +21,12 @@ using ATextView = global::Android.Widget.TextView;
 using AView = Android.Views.View;
 using LP = Android.Views.ViewGroup.LayoutParams;
 using R = Android.Resource;
-using Toolbar = AndroidX.AppCompat.Widget.Toolbar;
+using ATextView = global::Android.Widget.TextView;
+using AColor = Android.Graphics.Color;
+using Xamarin.Forms.Internals;
+using System.Collections.Generic;
+using System.Linq;
+using Xamarin.Platform;
 
 namespace Xamarin.Forms.Platform.Android
 {

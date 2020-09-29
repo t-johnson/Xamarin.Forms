@@ -12,6 +12,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Xamarin.Forms.Internals;
+using Xamarin.Platform;
 using AImageButton = Android.Widget.ImageButton;
 using AView = Android.Views.View;
 

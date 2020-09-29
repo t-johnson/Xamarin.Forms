@@ -1,5 +1,4 @@
-﻿using Android.Graphics.Drawables;
-using Android.Widget;
+﻿using Android.Widget;
 using Xamarin.Forms;
 using ASwitch = Android.Widget.Switch;
 
@@ -7,13 +6,11 @@ namespace Xamarin.Platform.Handlers
 {
 	public partial class SwitchHandler : AbstractViewHandler<ISwitch, ASwitch>
 	{
-		Drawable _defaultTrackDrawable;
-		bool _changedThumbColor;
-		OnListener _onListener;
+		OnCheckedChangeListener? _onListener;
 
 		protected override ASwitch CreateView()
 		{
-			_onListener = new OnListener(this);
+			_onListener = new OnCheckedChangeListener(this);
 
 			var aSwitch = new ASwitch(Context);
 
@@ -22,24 +19,12 @@ namespace Xamarin.Platform.Handlers
 			return aSwitch;
 		}
 
-		protected override void SetupDefaults()
+		public override void TearDown()
 		{
-			_defaultTrackDrawable = TypedNativeView.TrackDrawable;
-			base.SetupDefaults();
-		}
+			base.TearDown();
 
-		protected override void DisposeView(ASwitch nativeView)
-		{
-			if (_onListener != null)
-			{
-				nativeView.SetOnCheckedChangeListener(null);
-				_onListener = null;
-			}
-
-			_defaultTrackDrawable?.Dispose();
-			_defaultTrackDrawable = null;
-
-			base.DisposeView(nativeView);
+			_onListener?.Dispose();
+			_onListener = null;
 		}
 
 		public override SizeRequest GetDesiredSize(double widthConstraint, double heightConstraint)
@@ -49,8 +34,9 @@ namespace Xamarin.Platform.Handlers
 			if (sizeConstraint.Request.Width == 0)
 			{
 				int width = (int)widthConstraint;
+
 				if (widthConstraint <= 0)
-					width = (int)Context.GetThemeAttributeDp(global::Android.Resource.Attribute.SwitchMinWidth);
+					width = Context != null ? (int)Context.GetThemeAttributeDp(global::Android.Resource.Attribute.SwitchMinWidth) : 0;
 
 				sizeConstraint = new SizeRequest(new Size(width, sizeConstraint.Request.Height), new Size(width, sizeConstraint.Minimum.Height));
 			}
@@ -58,88 +44,28 @@ namespace Xamarin.Platform.Handlers
 			return sizeConstraint;
 		}
 
-		public static void MapIsToggled(IViewHandler handler, ISwitch view)
+		internal void OnCheckedChanged(bool isToggled)
 		{
-			(handler as SwitchHandler)?.UpdateIsToggled();
-		}
+			if (VirtualView == null)
+				return;
 
-		public static void MapOnColor(IViewHandler handler, ISwitch view)
-		{
-			(handler as SwitchHandler)?.UpdateOnColor();
-		}
-
-		public static void MapThumbColor(IViewHandler handler, ISwitch view)
-		{
-			(handler as SwitchHandler)?.UpdateThumbColor();
-		}
-
-		void UpdateIsToggled()
-		{
-			TypedNativeView.Checked = VirtualView.IsToggled;
-		}
-
-		internal void UpdateIsToggled(bool isChecked)
-		{
-			VirtualView.IsToggled = isChecked;
+			VirtualView.IsToggled = isToggled;
 			VirtualView.Toggled();
-		}
-
-		internal void UpdateOnColor()
-		{
-			if (TypedNativeView.Checked)
-			{
-				var onColor = VirtualView.OnColor;
-
-				if (onColor.IsDefault)
-				{
-					TypedNativeView.TrackDrawable = _defaultTrackDrawable;
-				}
-				else
-				{
-					TypedNativeView.TrackDrawable?.SetColorFilter(onColor.ToNative(), FilterMode.Multiply);
-				}
-			}
-			else
-			{
-				TypedNativeView.TrackDrawable?.ClearColorFilter();
-			}
-		}
-
-		void UpdateThumbColor()
-		{
-			var thumbColor = VirtualView.ThumbColor;
-
-			if (!thumbColor.IsDefault)
-			{
-				TypedNativeView.ThumbDrawable.SetColorFilter(thumbColor, FilterMode.Multiply);
-				_changedThumbColor = true;
-			}
-			else
-			{
-				if (_changedThumbColor)
-				{
-					TypedNativeView.ThumbDrawable?.ClearColorFilter();
-					_changedThumbColor = false;
-				}
-			}
-
-			TypedNativeView.ThumbDrawable.SetColorFilter(thumbColor, FilterMode.Multiply);
 		}
 	}
 
-	class OnListener : Java.Lang.Object, CompoundButton.IOnCheckedChangeListener
+	class OnCheckedChangeListener : Java.Lang.Object, CompoundButton.IOnCheckedChangeListener
 	{
-        readonly SwitchHandler _switchHandler;
+		readonly SwitchHandler _switchHandler;
 
-		public OnListener(SwitchHandler switchHandler)
+		public OnCheckedChangeListener(SwitchHandler switchHandler)
 		{
 			_switchHandler = switchHandler;
 		}
 
-		void CompoundButton.IOnCheckedChangeListener.OnCheckedChanged(CompoundButton buttonView, bool isToggled)
+		void CompoundButton.IOnCheckedChangeListener.OnCheckedChanged(CompoundButton? buttonView, bool isToggled)
 		{
-			_switchHandler.UpdateIsToggled(isToggled);
-			_switchHandler.UpdateOnColor();
+			_switchHandler.OnCheckedChanged(isToggled);
 		}
 	}
 }

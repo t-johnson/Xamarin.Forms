@@ -6,6 +6,8 @@ using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Util;
 using Android.Views;
+using Android.Graphics;
+using Xamarin.Platform;
 using AColor = Android.Graphics.Color;
 using AProgressBar = Android.Widget.ProgressBar;
 
