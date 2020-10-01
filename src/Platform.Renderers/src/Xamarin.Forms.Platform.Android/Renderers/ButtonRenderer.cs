@@ -5,6 +5,7 @@ using Android.Graphics;
 using Android.Util;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
+using Xamarin.Platform;
 using static System.String;
 using AButton = Android.Widget.Button;
 using AColor = Android.Graphics.Color;
@@ -218,13 +219,13 @@ namespace Xamarin.Forms.Platform.Android
 
 				switch (layout.Position)
 				{
-					case Button.ButtonContentLayout.ImagePosition.Top:
+					case ButtonContentLayout.ImagePosition.Top:
 						Control.SetCompoundDrawablesWithIntrinsicBounds(null, image, null, null);
 						break;
-					case Button.ButtonContentLayout.ImagePosition.Bottom:
+					case ButtonContentLayout.ImagePosition.Bottom:
 						Control.SetCompoundDrawablesWithIntrinsicBounds(null, null, null, image);
 						break;
-					case Button.ButtonContentLayout.ImagePosition.Right:
+					case ButtonContentLayout.ImagePosition.Right:
 						Control.SetCompoundDrawablesWithIntrinsicBounds(null, null, image, null);
 						break;
 					default:
